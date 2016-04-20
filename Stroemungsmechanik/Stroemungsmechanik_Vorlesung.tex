@@ -1,0 +1,420 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{units}
+\usepackage{enumerate}
+
+\begin{document}
+
+\section{Einordnung der Strömungsmechanik/ Fluidmechanik in die Ingenieurswissenschaft}
+
+%TODO TOADD Mindmap
+
+\section{Anwendungsgebiete der Fluidmechanik}
+
+\begin{itemize}
+\item Bauwesen
+\item Maschinenbau
+\item Verfahrenstechnik
+\item Verkehrswesen
+\item Natur
+\item \dots
+\end{itemize}
+
+\section{Eigenschaften von Fluiden}
+
+\subsection{Molekularer Aufbau}
+
+Materie besteht aus Atomen/ Molekülen vom Durchmesser $\sim 10^{-10} \text{m}$ \\
+\begin{itemize}
+\item[I)] geringer Abstand zwischen den Molekülen (hohe Dichte) \\
+$\Rightarrow$ intermolekulare Kräfte beeinflussen das Stoffverhalten
+\item[II)] großer Abstand (geringe Dichte) \\
+$\Rightarrow$ intermolekulare Kräfte sind klein \\
+$\Rightarrow$ Moleküle führen eine statische Bewegung infolge ihrer Thermischen Energie aus (kinetische Gastheorie)
+\end{itemize}
+Das unterschiedlich gewichtete Zusammenspiel dieser Bereiche führt zu den Aggregatzuständen (fest, flüssig, gasförmig).
+
+\subsection{Definition und Kennzeichen}
+
+Fluide sind Stoffe im flüssigen oder gasförmigen Aggregatszustand (Flüssigkeiten, Gase, Dämpfe). \\
+\textbf{Gemeinsame Kennzeichen:}
+\begin{itemize}
+\item Moleküle sind leicht verschiebbar.
+\item Eine andauernde Belastung führt zu einer andauernden Gestaltänderung.
+\item Die an einem Fluid angreifende Schubspannung ist eine Funktion der Deformations\textit{geschwindigkeit}.
+\end{itemize}
+\textbf{Kennzeichen der Flüssigkeiten:}
+\begin{itemize}
+\item Zusammenhalt ohne bestimmte Form
+\item Das Volumen einer Flüssigkeitsmenge ist praktisch konstant (dichtebeständig).
+\item Ein gegebener Raum wird \textit{nicht} vollständig ausgefüllt.
+\item Es bilden sich freie Oberflächen zu Gasen.
+\item Begrenzende Wände werden benetzt.
+%TODO add picture
+\item Ohne Begrenzungsflächen bilden sich Tropfen.
+\end{itemize}
+\textbf{Kennzeichen von Gasen:}
+\begin{itemize}
+\item Der Molekülabstand ist größer als bei Flüssigkeiten.
+\item kein Zusammenhalt
+\item Das Volumen einer Gasmenge ist vom Zustand abhängig ($p$, $T$) (Druck, Temperatur).
+\item Begrenzende Wände werden benetzt. \\
+$\Rightarrow$ "Haften an Wänden"
+\end{itemize}
+\textbf{Kennzeichen eines Fluids als Kontinuum:}
+\begin{itemize}
+\item Ein Fluid ist auch im kleinsten Volumenelement $dV$ homogen verteilt.
+\item Der mittlere Molekülabstand sowie die mittlere freie Wegelänge der Moleküle sind klein gegenüber den Abmessungen (z.B. $dV$) $\widehat{=}$ Knudsen-Zahl $Kn = \frac{\lambda}{l}$ ($\lambda$: mittlere freie Wegelänge (z.B. zwischen 2 Stößen); $l$: Abmessungen des zu berechnenden Körpers) \\
+Bedingung für Kontinuum: $Kn < 0.01$
+\end{itemize}
+
+\subsection{Zustandsgrößen}
+
+\textbf{Thermische Zustandgrößen}
+\begin{itemize}
+\item Mase $m$, $[m] = \text{kg}$
+\item Volumen $V$, $[V] = \text{m}^3$
+\item Temperatur $T$, $[T] = \text{K}$ \\
+\phantom{Temperatur} $\vartheta$, $[\vartheta] = {^\circ} \text{C}$
+\item Druck $p$, $[p] = \text{Pa}$
+\end{itemize}
+\textbf{Abgeleitete kalorische Zustandsgrößen}
+\begin{itemize}
+\item innere Energie $U$, $[U] = \text{J}$
+\item Enthalpie $H$, $[H] = \text{J}$
+\item Entropie $S$, $[S] = \frac{\text{J}}{\text{K}}$
+\end{itemize}
+\textbf{Nomenklatur}
+\begin{itemize}
+\item Intensive Zustandsgrößen sind unabhängig von der Stoffmenge; z.B. $p$, $T$
+\item Extensive Zustandsgrößen sind abhängig von der Stoffmenge; z.B. $H$, $S$, $U$
+\item spezifische Zustandsgrößen $\widehat{=} \frac{\text{extensive Größe}}{Masse}$; i.d.R. kleine Buchstaben; z.B. $h$, $s$, $u$
+\item molare Zustandsgrößen $\widehat{=} \frac{\text{extensive Größe}}{Molanzahl}$
+\item -"dichte" $\widehat{=} \frac{\text{extensive Größe}}{Volumen}$; z.B. $\text{Dichte} = \frac{\text{Masse}}{\text{Volumen}} = \rho$, $[\rho] = \frac{\text{kg}}{\text{m}^3}$
+\end{itemize}
+
+\subsubsection{Masse und Volumen}
+
+\begin{itemize}
+\item Masse $m$, $[m] = \text{kg}$
+\item Teilchenanzahl $N$, $[N] = 1$
+\item Stoffmenge $\nu = \frac{N}{N_A}$, $N_A$: Avogadro-Konstante $N_A = 6,022 \cdot 10^{23} \text{mol}^{-1}$
+\end{itemize}
+\textbf{Bezogene extensive Zustandsgrößen $V$ und $m$}
+\begin{itemize}
+\item Dichte: $\lim_{\Delta V \rightarrow 0} \frac{\Delta m}{\Delta V} = \frac{dm}{dV} = \rho$, $[\rho] = \frac{\text{kg}}{\text{m}^3}$
+\item spezifisches Volumen: $v = \frac{1}{\rho}$, $[v] = \frac{\text{m}^3}{\text{kg}}$
+\end{itemize}
+
+\subsubsection{Temperatur}
+
+\begin{itemize}
+\item intensive Zustandsgröße
+\item Maß für die kinetische Energie der Teilchen $E_{kin} = \frac{f}{2} k T = \frac{1}{2} m_A \bar{c}^2$ \\
+$f$: Anzahl der Freiheitsgerade (z.B. $f=3$ für einatomige Gase) \\
+$k = 1,38 \cdot 10^{-23} \frac{\text{J}}{\text{K}}$ Boltzmann-Konstante
+\item Anmerkungen: $\vartheta$: Temperatur in Grad Celsius \\
+\phantom{Anmerkungen:} $T = \theta + 273,15$
+\end{itemize}
+
+\subsubsection{Druck}
+
+\begin{itemize}
+\item intensive Zustandsgröße
+\item Der Druck ist der Quotient aus der Kraft $F$ und der Fläche $A$, auf der die Kraft senkrecht steht ($\perp$) \\
+$p = \frac{F}{A}$, $[p] = \frac{\text{N}}{\text{m}^2} = \frac{\text{kg} \text{m}}{\text{s}^2} = \text{Pa}$, alt: $1 \text{bar} = 10^5 \text{Pa}$ \\
+$1 \text{mm} \text{W} \text{S} = 9,81 \text{Pa}$ ????? %TODO was ist mmWS?
+\item Druck ist eine skalare Größe.
+\end{itemize}
+
+\subsubsection{Innere Energie}
+
+\[ U := E - E_{kin} - E_{pot} \]
+\begin{itemize}
+\item[$U$] Innere Energie $\widehat{=}$ Summe der Energien aller Moleküle (Translation infolge $T$, Rotation, Schwingungen) \\
+Extensive Zustandsgröße
+\item[$E$] Gesamtenergie einer fluiden Phase
+\item[$E_{kin}$] kinetische Energie, die zur Position des Systems als "Ganzes" gehört
+\item[$E_{pot}$] potentielle Energie, die zur Bewegung des Systems als "Ganzes" gehört
+\end{itemize}
+\begin{itemize}
+\item[$u$] $:= \frac{U}{m}$ spezifische innere Energie
+\item[$c_V$] $:= \big( \frac{\partial u}{\partial T} \big)_V$ spezifische isochore Wärmekapazität
+\item[$u(T, p)$] kalorische Zustandsgleichung
+\end{itemize}
+
+\subsubsection{Enthalpie}
+
+\[ H = U + p V \]
+\begin{itemize}
+\item[$H$] Enthalpie, extensive Zustandsgröße
+\item[$h$] $:= \frac{H}{m} = u + p v$ spezifische Enthalpie
+\item[$pV$] Volumenänderungsarbeit, die erforderlich ist, das Volumen $V$ in einem Raum mit dem Druck $p$ zu fördern
+\item[$c_p$] $:= \big( \frac{\partial h}{\partial T} \big)_p$ spezifische isobare Wärmekapazität
+\item[$h(p, T)$] kalorische Zustandsgleichung
+\end{itemize}
+Hinweis:
+%TODO add picture
+$\dot{m} (h + \frac{c^2}{2} + gz)$ $\widehat{=}$ der einem Kontrollvolumen mit dem Massenstrom $\dot{m}$ zugeführten Leistung
+
+%TODO
+%-- Einschub --
+%Quellen:
+%
+%Schroeder: Thermal Physics
+%
+%Sigloch: Technische Fluidmechanik
+%
+%Herwig: Strömungsmechanik
+%
+%--------
+
+%Jetzt kommt 3.3.6
+
+\subsubsection{Entropie}
+
+$S$ externe Zustandsgröße \\
+$s = \frac{S}{m}$ spezifische Entropie \\
+Beispiel: Einstein-Solids \\
+\begin{itemize}
+\item[$q$] Energiequanten
+\item[$N$] Energie"speicher"
+\item[$\Omega$] Multiplicity $\widehat{=}$ Anzahl der Möglichkeiten die Quanten in den Speicher zu verteilen \\
+$\Omega (N, q) = {q + N - 1 \choose q} = \frac{(q + N - 1)!}{q! (N - 1)!}$
+\end{itemize}
+
+Als Beispiel seien $N_A = 3$, $N_B = 3$, $q_t = q_A + q_B = 4$ gewählt. Dann gibt es folgene Möglichkeiten: \\
+\begin{tabular}{c c | c c | c c}
+\multicolumn{2}{c |}{$N_A$} & \multicolumn{2}{c |}{$N_B$} & & \\
+$q_A$ & $\Omega_A$ & $q_B$ & $\Omega_B$ & $q_t$ & $\Omega_A \Omega_B$ \\ \hline
+0 &  1 & 4 & 15 & 4 & 15 \\
+1 &  3 & 3 & 10 & 4 & 30 \\
+2 &  6 & 2 &  6 & 4 & 36 \\
+3 & 10 & 1 &  3 & 4 & 30 \\
+4 & 15 & 0 &  1 & 4 & 15
+\end{tabular}
+
+Angenommen es sind $1$ Energiequant in $A$ und $3$ in $B$ gespeichert. Das ist der Macrostate. Ein von 3 möglichen Microstates in $A$ ist dann die Verteilung $0,1,0$ und in $B$ ist dann $0,2,1$ einer von zehn moeglichen Microstates. Unabhängig von dieser inneren Verteilung ist die Multiplicity immer $\Omega = \Omega_A \Omega_B = 30$ \\
+%z.B.: \\
+%Macrostate: $q_A = 1$, $q_B = 3$ \\
+%Microstate: $010$ $021$ (z.B.) \\
+%Multiplicity: $\Omega = \Omega_A \Omega_B = 30$
+
+\textbf{2. Hauptsatz der Thermodynamik}
+
+Jedes große System im Gleichgewicht wird einen "Macrostate" mit der höchsten "Multiplicity" einnehmen.
+
+$S := k \ln(\Omega)$ ($k$ Boltzmann Konstante)
+
+\textbf{Hinweise:}
+\begin{itemize}
+\item $dS = \frac{dQ}{T}$ Zufuhr von Energiequanten erhöht die Multiplicity $\Omega$
+\item Für jedes adiabate System gilt $dS \geq 0$
+\item Gibb'sche Gleichung $ds = \frac{du + pdv}{T} = \frac{dh - vdp}{T} = \frac{dq}{T}$
+\end{itemize}
+
+\subsection{Thermische Zustandsgleichungen}
+
+Zustandsgleichungen stellen eien stoffspezifischen Zusammenhang zwischen den Zustandsgrößen dar.
+\begin{itemize}
+\item thermische Zustandsgleichung (z.B. $f(p, V, T)$)
+\item kalorische Zustandsgleichung (z.B. $f(p, V, T, H, S, U$)
+\end{itemize}
+Viele Fluide besitzen eigene Zustandsgleichungen!
+
+\subsubsection{Gibb'sche Phasenregel}
+
+\[F = K + 2 - P\]
+\begin{itemize}
+\item[$F$] Freiheitsgerade (unabhängige Zustandsgrößen)
+\item[$K$] Anzahl der Komponenten
+\item[$P$] Anzahl der Phasen (fest, flüssig, gasförmig)
+\end{itemize}
+z.B. flüssiges Wasser und Wasserdampf \\
+$\left.
+\begin{array}{ll}
+K = 1 \\ 
+P = 2
+\end{array}
+\right\}
+\Rightarrow F = 1 \rightarrow P_D = f(T) ~~ \text{Dampfdruckkurve}
+$
+
+\subsubsection{Ideale Gasgleichung}
+
+\textbf{ideale Gase:}
+\begin{itemize}
+\item keine intermolekularen Kräfte (van der Waals-Kräfte)
+\item Moleküle haben kein Volumen
+\end{itemize}
+
+\[p V = \nu Q T\]
+
+\begin{itemize}
+\item[$\nu$] Stoffmenge
+\item[$Q$] $= 8,314 \frac{\text{J}}{\text{mol}~\text{K}}$ ~Universelle Gaskonstante
+\end{itemize}
+
+\[p V = m R T\]
+\begin{itemize}
+\item[$R$] spezifische Gaskonsante
+\end{itemize}
+
+\[p = \rho R T\]
+\begin{itemize}
+\item[$R$] $= \frac{Q}{M}$, $M$ Molmasse
+\end{itemize}
+
+\subsubsection{Reale Gase}
+
+Erweiterung der idealen Gasgleichung
+\begin{itemize}
+\item intermolekulare Kräfte, indem der reale Druck um den Binnendruck vergrößert wird \\
+$p_{real} < r_{ideal}$
+\item reales Gasvolumen $V$ wird um das Kovolumen verkleinert \\
+$V_{real} > V_{ideal}$
+\end{itemize}
+Man erhält die van der Waals'sche Zustandsgleichung:
+\[
+\underbrace{\Big( p + \overbrace{\frac{a}{V_A^2}}^{\substack{Binnen-\\druck}} \Big)}_{\substack{P_{ideal}}} \underbrace{\big( V_A - \overbrace{b}^{\substack{Ko-\\volumen}} \big)}_{\substack{V_{ideal}}} = QT
+\]
+
+$a$ und $b$ sind van der Waals-Konstanten (s. Kuchling: Taschenbuch der Physik) VDI Wärmeatlas ??????
+
+\textbf{Alternativen:}
+\begin{itemize}
+\item erweiterte Gasgleichung \\
+\[p V = m R T Z(p, T)\] \\
+$Z$ Realgaskoeffizient (z.B. $Z(p, T)$)
+\item Virialgleichung \\
+\[\frac{p V_A}{Q T} = 1 + \frac{a_2}{V_A} + \frac{a_3}{V_A^2} + \dots\] \\
+$a_2$, $a_3$ Virialkoeffizienten
+\end{itemize}
+
+\subsection{Transporteigenschaften}
+
+z.B. Diffusion (Fick'sches Gesetz: Stoff-/ Massentransport), Reibung (Impulstransport), Wärme (Fouriesches Gesetz: Energietransport)
+
+\subsubsection{Viskosität (früher Zähigkeit) Newtonscher Fluide}
+
+\textbf{Definition:} Die Viskosität ist die Eigenschaft eines Fluides, beim Verformen eine Spannung aufzunehmen, die von der Deformationsgeschwindigkeit abhängt. \\
+\textbf{Frage:} Welcher Zusammenhang besteht zwischen der Schubspannung im Fluid und der Deformationsgeschwindigkeit? \\
+\textbf{Versuch:} Couette-Versuch für laminare Strömung ($Re_{krit} = 1300 > Re$) \\
+(Schleppen einer Platte mit der Geschwindigkeit $C_x$)
+
+%TODO ADD picture
+\begin{itemize}
+\item[$F$] Schleppkfraft
+\item[$A$]
+\item[$C_x$]
+\item[$c_x(y)$]
+\item[$h$]
+\end{itemize}
+RB's - Schichtenströmung ohne Druckgradienten \\
+$\frac{\partial p}{\partial x} = \frac{\partial p}{\partial y} = 0$ (1D Strömung) für $Re < Re_{krit} = \frac{h C_x \rho}{\eta}$ \\
+Versuchsergebnisse:
+\begin{itemize}
+\item lineare Geschwindigkeitsverteilung $c_x(y)$
+\item $F \sim C_x$
+\item $F \sim A$
+\item $F \sim h^{-1}$
+\end{itemize}
+
+%TODO geschweifte Klammern und so
+
+$F \sim \frac{C_x A}{h}$ \\
+$F = \eta \frac{C_x A}{h}$, $\eta$ Proportionalitätsfaktor \\
+Mit $\tau = \frac{F}{A} = \eta \frac{C_x}{h} = \eta \frac{d c_x}{d y}$
+
+%TODO TOADD
+
+\textbf{Anmerkungen:}
+\begin{itemize}
+\item Die Schubspannung $\tau$ wird in jedem Schritt $y = \text{konst}$ übertragen.
+\item Die dynamische Viskosität $\eta$ ist eine Stoffeigenschaft die primär temperaturabhängig und kaum druckabhängig ist. \\
+$\eta = f(T)$ Gase: Sutherland Formel, Flüssigkeiten: empirische Formeln
+%TODO TOADD Graph
+\item Die kinematische Viskosität $\nu$ ist definiert als
+\[\nu := \frac{\eta}{\rho}\]
+$[\nu] = \frac{m^2}{s}$
+\item Für turbulente Strömungen gilt
+\[ \tau = (\eta + \eta_T) \frac{dc}{dy} = \eta \frac{dc}{dy} - \rho \overline{c_x' c_y'} \]
+= laminarer Anteil + turbulente Scheinreibung \\ %TODO TOADD geschweifte Klammern
+Ansatz: $c_x = \overline{c_x} + c_x'$, $c_y = \overline{c_y} + c_y'$, $c_z = \overline{c_z} + c_z'$
+%TODO TOADD Bilder/ Graphen
+\end{itemize}
+
+\subsubsection{Viskosität der Nicht-Newton'scher Fluide}
+
+%TODO TOADD Graph
+\begin{itemize}
+\item Newton'sches Fluids \\ Luft, Waser, \dots
+\item plastisches Fluid (Bingham-Fluid) \\ Zahnpasta, Honig
+\item pseudoplastisches Fluid \\ Schmelzen, Hochpolymere
+\item dilatantes Fluid \\ Klebstoffe, nasser Sand
+\item ideales Fluid ($\eta = 0$)
+\end{itemize}
+
+\section{Statik der Fluide}
+
+Statik bedeutet, dass das Fluid sich in Ruhe befindet: \\
+Strömungsgeschwindigkeit: $\overline{c} = (c_x c_y c_z) = 0 ~~ \Rightarrow \frac{\partial c}{\partial x} = \frac{\partial c}{\partial y} = \frac{\partial c}{\partial z} = 0$ \\
+$\Rightarrow$ keine Schubspannung im Fluid: $\tau \sim \frac{\partial c}{\partial y_t ??????} = 0$
+
+\subsection{Grundgleichung der Fluidstatik}
+
+\textbf{Annahmen:}
+\begin{itemize}
+\item ruhendes kompressibles Fluid ($\rho$ veränderlich)
+\item Zustandsgrößen sind von z abheangig (z.B. $\rho (z)$) \\
+%TODO TOADD Bild
+\end{itemize}
+
+Kräftegleichgewicht in z-Richtung \\
+$\sum F_z = 0 = p dA - (p + dp) dA - \rho(z) dA dz g(z)$ (letzter Term ist $dG$) %TODO geschweifte Klammer
+\[ \frac{dp}{dz} = -\rho(z) g(z) \]
+Grundgleichung der Fluidstatik
+
+\subsection{Hydrostatik}
+\subsubsection{Grundgleichung der Hydrostatik}
+\textbf{Annahmen:}
+\begin{itemize}
+\item ruhendes Fluid für $\rho = \text{konst}$ $\widehat{=}$ inkommpressibles Fluid
+\item konstante Erdbeschleunigung $g$
+\end{itemize}
+%TODO TOADD Bild
+
+$\frac{dp}{dz} = - \rho g$ \\
+$\int_p^{p_0} dp = - \int_0^h \rho g dz$ \\
+$p_0 - p = - \rho g h$ \\
+\[ p = p_0 + \rho g h \]
+\[ p(z) = p_0 + \rho g z' \]
+Grundgleichung der Hydrostatik
+
+\textbf{Anmerkungen:}
+\begin{itemize}
+\item In Punkten gleicher Tiefe herscht der gleiche Druck.
+\item Druck wächst proportional zur Tiefe (Proportionalitätsfaktor $\widehat{=}$ Wichte $\gamma = \rho g$)
+\end{itemize}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

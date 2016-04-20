@@ -1,0 +1,300 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{units}
+
+%TODO alternative for \pmb{\mathbb{E}} (pmb is ugly)
+%TODO same with \pmb\varepsilon
+
+\begin{document}
+
+\section{Literature}
+
+see handout
+
+\section{Transient structural problems in 2d/ 3d assuming linear elasticity}
+
+Strong form of the balance of momentum
+\begin{equation}
+\text{div} ( \bm\sigma (\bm x , t)) + \varrho (\bm x) b (\bm x, t)
+= \underbrace{\varrho (x) \bm{\ddot{u}} (\bm x, t)}_{\substack{\text{inertial forces}}}
+~~\forall~\bm x  \in B,~t \in [0,T]
+\label{eq:strformbalmom}
+\end{equation}
+
+%TODO
+
+problem statement: \\
+find $\bm u (\bm{x}, t)$ that solves \eqref{eq:strformbalmom} subject to:
+
+\begin{enumerate}[i)]
+\item boundary conditions (b.c.)
+%TODO add  picture
+\begin{equation}
+\tag{Dirichlet}
+\bm u (\bm{x}, t) = \bm{\bar{u}} (\bm{x}, t) ~\text{on}~ \partial B^u~~\forall~t \in [0, T]
+\end{equation}
+\begin{equation}
+\tag{Neumann}
+\bm{t} (\bm{x}, t) = \bm{\sigma} (\bm{x}, t) \bm{n} (\bm{x}) = \bm{\bar{t}} (\bm{x}, t) ~\text{on}~ \partial B^t ~~\forall~t \in [0, T]
+\end{equation}
+
+$\partial B = \partial B^u \cup \partial B^t$ \\
+$\partial B^u \cap \partial B^t = \emptyset$
+%TODO toadd
+\item initial conditions (i.c)
+\[ \bm{u} (\bm{x}, 0) = \bm{\overline{u_0}} (\bm{x}) ~~\forall \bm{x} \in B \]
+\[ \bm{\dot{u}} (\bm{x}, 0) = \bm{\overline{v_0}} (\bm{x}) ~~\forall \bm{x} \in B \]
+\item kinematics (small strain theory)
+\[ \pmb\varepsilon (\bm{x}, t) = \nabla^{sym} \bm{u} (\bm{x}, t) = \frac{1}{2} \left[ \nabla \bm{u} + [\nabla \bm{u}]^T \right] \]
+\item constitute relations (material model)
+
+e.g. Hooke's law: $\bm{\sigma} = \pmb{\mathbb{E}}^e : \pmb\varepsilon$
+\end{enumerate}
+
+Derivation for the weak form (standard Galerkin approach)
+\begin{itemize}
+\item multiplication by test function $\bm{\eta}$
+\[ \Rightarrow \bm{\eta} \cdot \operatorname{div}(\bm{\sigma}) + \varrho \bm{\eta} \cdot \bm{b} = \varrho \bm{\eta} \cdot \bm{\ddot{u}} \]
+\item integration over the spatial domain B
+\[ \Rightarrow \int_B [ \bm{\eta} \cdot \operatorname{div}(\bm\sigma) + \varrho \bm\eta \cdot \bm b ] ~dv
+= \underbrace{\int_B \varrho \bm\eta \cdot \bm{\ddot{u}} ~dv}_{\substack{W_{inert}}}\]
+for $\bm\eta = \delta \bm u$ (virtual displacement), $W_{inert}$ can be interpreted as the virtual work of the "inertial forces".
+\item \textit{spatial} discretization of the domain
+\[ B \approx B^h = \bigcup_{e=1}^{M_{el}} B^e \]
+\textit{spatial} approximation of test functions
+\[ \bm\eta(\bm x) \approx \bm\eta^h(\bm x) = \bigcup_{e=1}^{M_{el}} \bm\eta^e (\bm x) \]
+with
+\[ \bm\eta^e(\bm x) = \sum_{A=1}^{M_{en}} \bm\eta^{eA} N^A(\bm x) \]
+\end{itemize}
+
+Let us consider the term $W_{inter}$ (only difference to the euqations considered last semester) in more detail.
+
+\begin{equation}
+\begin{aligned}
+W_{inter}^h &= \sum_{l=1}^{M_{el}} \left[ \int_{B^e} \left[ \sum_{A=1}^{M_{en}} N^A \bm\eta^{eA} \cdot \bm{\ddot{u}} \right] dv \right] \\
+&= \sum_{e=1}^{M_{el}} \sum_{A=1}^{M_{en}} \bm\eta^{eA} \underbrace{\int_{B^e} N^A \varrho \bm{\ddot{u}} ~dv}_{=: f_{inert,e}^A}
+\end{aligned}
+\notag
+\end{equation}
+
+Connection to \textit{global} list via
+\[ \bm\eta^{eA} = \bm\eta^t \pmb{\mathbb{L}}_{e,A}^t \]
+\begin{equation}
+\begin{aligned}
+\Rightarrow W_{inert}^h &= \sum_{e=1}^{M_{el}} \sum_{A=1}^{M_{en}} \bm\eta^t \pmb{\mathbb{L}}_{e,A}^t \cdot \bm f_{inert,e}^A \\
+&= \bm\eta^t
+\underbrace{\left[ \sum_{e=1}^{M_{el}} \sum_{A=1}^{M_{en}} \pmb{\mathbb{L}}_{e,A}^t \cdot \bm f_{inert,e}^A \right]}_{=: \bm f_{inert}}
+\end{aligned}
+\notag
+\end{equation}
+
+Together with what was de???? for the quasi-static case, we obtain
+\[ W^h = \bm\eta^t [ \bm f_{inert} + \bm f_{int} - \bm f_{vol} - \bm f_{sur} ] \overset{!}{=} \bm 0 \]
+
+and thus it follows for arbitrary $\bm\eta^t \not\equiv \bm 0$
+\[ \bm f_{inert} + \bm f{int} - \bm f_{vol} - \bm f_{sur} = \bm 0 \]
+note: $\bm f_{int} = \bm{\hat{f}}_{int} (\bm u)$ and $\bm f_{inert} = \bm{\hat{f}}_{inert} (\bm{\ddot{u}})$
+
+We already know the representation
+\[ \bm f_{int} = \pmb{\mathbb{K}} \bm u \]
+with $\pmb{\mathbb{K}} := \sum_{e=1}^{n_{el}} \sum_{A=1}^{M_{en}}$
+
+
+
+
+
+
+
+%TODO very much
+%start of second lesson
+
+1. Semi-discrete equations of motion
+
+\[ \bm t_{inert} = \sum_{e=1}^{n_{el}} \sum_{A=1}^{n_{en}} \bm L_{e,A}^t \int_.....
+= \sum_{e=1}^{n_{el}} \sum_{A=1}^{n_{en}} \bm L_{e,A}^t \int_{B^e} N^A \varphi \bm L_{e,B} \bm{\ddot{u}} N^B dV
+= \sum_{e=1}^{n_{el}} \sum_{A=1}^{n_{en}} \sum_{B=1}^{n_{en}}
+\]
+%TODO
+
+{Remarks:} \\
+\begin{itemize}
+\item Damping is often taken into account by an additional term.
+\[ \bm M \bm{\ddots{u}} + \bm D \bm{\dot{u}} + \bm K \bm u = \bm f_{ext} \]
+\item Rayleigh damping
+\[ \bm D = \alpha \bm M + \beta \bm K \]
+where $\alpha$ and $\beta$ are phenomenological parameters.
+\end{itemize}
+
+2. Computation of the mass matrix
+
+Recall that $\bm M$ is defined
+\[ \bm M = \sum_{e=1}^{n_{el}} \sum_{A=1}^{n_{en}} sum_{B=1}^{n_{en}} \bm L_{e,A}^t \int N^A \varphi N^B dV \bm L_{e,B} \]
+\begin{equation}
+\bm M_{AB}^e = \int N^A \varphi N^B dV
+\label{eq:MassMatEntriesExact}
+\end{equation}
+We now use numerical integration: Gauss quad.
+\begin{equation}
+\bm M_{AB}^e = \sum_{q=1}^{n_{qp}} N^A \varphi N^B \bm I \text{det}(\bm J^e) w_q
+\label{eq:MassMatEntriesNumerical}
+\end{equation}
+
+%TODO picture
+\begin{tabular}{c || c | c | c}
+Node & N & $\partial N / \partial \xi$ & $\partial N / \partial \eta$ \\
+\hline
+1 & $\frac{1}{4} (1-\xi)(1-\eta)$ & $-\frac{1}{4}(1-\eta)$ & $-\frac{1}{4}(1-\xi)$ \\
+2 & $\frac{1}{4} (1+\xi)(1-\eta)$ & $ \frac{1}{4}(1-\eta)$ & $-\frac{1}{4}(1+\xi)$ \\
+3 & $\frac{1}{4} (1+\xi)(1+\eta)$ & $ \frac{1}{4}(1+\eta)$ & $ \frac{1}{4}(1+\xi)$ \\
+4 & $\frac{1}{4} (1-\xi)(1+\eta)$ & $-\frac{1}{4}(1+\eta)$ & $ \frac{1}{4}(1-\xi)$
+\end{tabular}
+
+%TODO picture
+
+Connectivity
+\begin{tabular}{c | c | c | c | c}
+e/N& 1 & 2 & 3 & 4 \\
+1 & 1 & 2 & 4 & 3 \\
+2 & 5 & 3 & 4 & 6
+\end{tabular}
+
+Coordinates
+\begin{tabular}{c | c | c}
+N/t & $x_1$ & $x_2$ \\
+1 & $1$ & $0$ \\
+2 & $2$ & $0$ \\
+3 & $\sqrt{2}/2$ & $\sqrt{2}/2$ \\
+4 & $2$ & $2$ \\
+5 & $0$ & $1$ \\
+6 & $0$ & $2$
+\end{tabular}
+
+Compute $\bm M_{24}^1$
+
+1. We need the coordinates of elements
+\[ \bm X^e = 
+\begin{pmatrix}
+1 & 2 & 2 & 0.7071 \\
+0 & 0 & 2 & 0.7071
+\end{pmatrix} \] %TODO
+2. Loop on quadrature points ($\rightarrow$ here we only compute one) \\
+From equation \ref{eq:MassMatEntriesNumerical}:
+\[ \bm M_{24}^1 = N^2 \varphi N^4 \bm I \text{det}(\bm J^e) w_1 \]
+Coordinates of first quadrature ()%TODO
+\[ N = \begin{Bmatrix}
+0. \\ 0.1
+\end{Bmatrix} \]
+\[ \lambda^e = \begin{Bmatrix}
+-0.3943 & -0.3943 \\
+ 0.3943 & -0.1057 \\
+ 0.1057 &  0.1057 \\
+-0.1057 &  0.3943
+\end{Bmatrix} \]
+
+\[ \bm J^e = \bm X^e \lambda^e = \begin{bmatrix}
+0.5309 & -0.1155 \\
+0.1266 &  0.4902
+\end{bmatrix} \]
+
+\[ \text{det}(\bm J^e) = 0.276 \]
+\[ dv^{e, I} = \text{det}(\bm J^e) w_q = 0.276 \]
+\[ \bm M_{24}^{1, I} = N^2 \varphi N^4 dv^{1,1} \bm I \cong 0.0077 \bm I \]
+\[ \bm M_{24}^{1, I} = \begin{bmatrix}
+0.0077 & 0 \\
+0 & 0.0077
+\end{bmatrix} \]
+
+ASSEMBLY OF MASS MATRIX
+\begin{itemize}
+\item[Option 1:]
+\[ \bm M = \sum_{e=1}^{n_{el}} \sum_{A=1}^{n_{en}} \sum_{B=1}^{n_{en}} \bm L_{e,A}^t \sum_{q=1}^{n_{qp}} \bm M_{AB}^e \bm L_{e,B} \]
+\item[Option 2:] Compute first a complete local mass matrix of the element $\bm M^e$ and then assemble into the global $\bm M$
+\[ \bm M = \sum_{e=1}^{n_{el}} \bm M^e \]
+\end{itemize}
+
+3. The Central Difference Method - CDM
+
+Recall from eq.1 %TODO noch nicht vorhanden. Spaeter linken
+\[ \bm M \bm{\ddot{u}} + \bm K \bm u = \bm f_{ext} \]
+%TODO picture
+\begin{equation}
+\bm{\dot{u}_n} = \frac{1}{2 \Delta t} [ \bm u_{n+1} - \bm u_{n-1} ]
+\label{eq:FirstDerivNumerical}
+\end{equation}
+Taylor expansion
+\begin{equation}
+\bm u_{n+1} = \bm u_n + \Delta \dot{\bm u}_n + \frac{\Delta t^2}{2} \ddot{bm u}_n
+\label{TaylorForwards}
+\end{equation}
+\begin{equation}
+\bm u_{n-1} = \bm u_n - \Delta \dot{\bm u}_n + \frac{\Delta t^2}{2} \ddot{bm u}_n
+\label{TaylorBackwards}
+\end{equation}
+From equation \ref{TaylorForwards} and \ref{TaylorBackwards}
+\begin{equation}
+\bm{\ddot{u}}_n = \frac{1}{\Delta t^2} [\bm u_{n-1} - 2 \bm u_n + \bm u_{n+1}]
+\label{SecondDerivNumerical}
+\end{equation}
+Replace \ref{SecondDerivNumerical} into ???
+\[ \bm M \frac{1}{\Delta t^2} [ \bm u_{n-1} - 2 \bm u_n + \bm u_{n+1}] + \bm K \bm u_n = \bm f_n^{ext} \]
+\begin{equation}
+\bm u_{n+1} = \Delta t^2 \bm M^{-1} [ \bm t_n^{ext} - \bm K \bm u_n ] + 2 \bm u_n - \bm u_{n-1}
+= \bm u_n + \Delta t \left[ \frac{\bm u_n - \bm u_{n-1}}{\Delta t} + \Delta t^2 \bm M^{-1} \bm f_n
+TODO \right]
+\label{keineAhnungWas1}
+\end{equation}
+\begin{equation}
+\bm v_n = \frac{\bm u_n - \bm u_{n-1}}{\Delta t} \neq \bm{\dot{u}}_n \text{on eq 4???TODO}
+TODO
+\label{keineAhnungWas2}
+\end{equation}
+\[ \bm u_{n+1} = \bm u_n + \Delta t \bm v_n + \Delta t^2 \bm{\ddot{u}}_n
+= \bm u_n + \Delta t [ \bm v_n + \Delta t \bm{\ddot{u}}_n ] \]
+\begin{equation}
+\bm \hat{v}_n = \bm v_n + \Delta t \bm{\ddot{u}}_n
+TODO
+\label{keineAhnungWas3}
+\end{equation}
+Finally the update for the displacement is
+\begin{equation}
+\bm u_{n+1} = \bm u_n + \Delta t \bm{\hat{v}}_n
+TODO
+\label{keineAhnungWas4}
+\end{equation}
+
+\textbf{Remark:} \\
+The update of $\bm u_{n+1}$ is \textit{explicit} because the predictions for $\bm u_{n+1}$ are dependent on information from previous time steps $\rightarrow ~ t_n,~t_{n-1}$
+
+4. Algorithm for CDM
+\begin{itemize}
+\item Given $\bm u_0$, $\bm v_0$, $\bm f_0^{ext}$, $\Delta t$
+\item Loop on time $t_0$ to $t_{final}$ \\
+if $t_n = t_0$
+\[ \bm u_{n-1} = \frac{\Delta t^2}{2} \bm M^{-1} \bm f_n^{ext} - \Delta t \bm{\dot{u}}_n \]
+\[ \bm v_n = \frac{\bm u_n - \bm u_{n-1}}{\Delta t} \]
+else
+\[ \bm v_n = \bm{\hat{v}}_{n-1} \text{from eq 2 and 10 TODO} \]
+end if
+\[ \bm{\ddot{u}}_n = \bm M^{-1} \bm f_n \]
+\[ \bm{\hat v} = \bm v_n + \Delta t \ddot{\bm u}_n \]
+\[ \bm u_{n+1} = \bm u_n + \Delta t \bm{\hat v}_n \]
+(We use $\bm{\hat v}_n$ in the following time step $\rightarrow$ save it! \\
+End loop on time
+\end{itemize}
+
+
+\end{document}
+
+
+
+
+
+
+
+
